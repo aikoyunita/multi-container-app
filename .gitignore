@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# Node.js
+frontend/node_modules/
+*.log
+
+# Docker
+.env
+
+# System files
+.DS_Store
