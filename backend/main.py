@@ -1,17 +1,20 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+import docker
 
 app = FastAPI()
 
-# Allow all origins for development
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # or ["http://localhost:5173"] for stricter setup
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 @app.get("/")
-def read_root():
-    return {"message": "Hello from FastAPI!"}
+def root():
+    return {"message": "Backend is running"}
+
+@app.get("/containers")
+def get_containers():
+    try:
+        client = docker.from_env()
+        containers = client.containers.list()
+        return [
+            {"name": container.name, "image": container.image.tags}
+            for container in containers
+        ]
+    except Exception as e:
+        return {"error": str(e)}
