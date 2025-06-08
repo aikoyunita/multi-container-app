@@ -1,4 +1,7 @@
 fastapi
 uvicorn
 docker
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8e2816c20de160c383f1e0a3bdec02f1ba03cfec
